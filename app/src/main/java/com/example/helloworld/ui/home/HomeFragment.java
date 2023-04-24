@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,10 +18,16 @@ import com.example.helloworld.Game;
 import com.example.helloworld.R;
 import com.example.helloworld.databinding.FragmentHomeBinding;
 
+import YTJ.DataActivity;
+
 public class HomeFragment extends Fragment {
     private Button startButton;
     private TextView helloText;
     private Button gameButton;
+
+    private Button ytjButton;
+
+    private EditText ytjSearchTxt;
     public static final String TAG ="MainActivity";
 
     private FragmentHomeBinding binding;
@@ -36,7 +43,8 @@ public class HomeFragment extends Fragment {
         startButton = root.findViewById(R.id.start_button);
         helloText = root.findViewById(R.id.hello_text);
         gameButton = root.findViewById(R.id.game_button);
-
+        ytjButton = root.findViewById(R.id.searchYtjBtn);
+        ytjSearchTxt = root.findViewById(R.id.searchYtjTxt);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +62,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), Game.class);
+                startActivity(i);
+            }
+        });
+
+        ytjButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), DataActivity.class);
+                Log.i(TAG,ytjSearchTxt.getText().toString());
+                i.putExtra("ytjSearchTxt",ytjSearchTxt.getText().toString());
                 startActivity(i);
             }
         });
